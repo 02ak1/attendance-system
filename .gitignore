@@ -1,0 +1,4 @@
+*.xlsx
+venv/
+.python-version
+__pycache__/
