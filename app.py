@@ -16,7 +16,7 @@ with open(file_path, "rb") as file:
     file_data = file.read()
 # ダウンロードボタンを表示
 st.download_button(
-    label="スケジュールファイルをダウンロードはこちらから",
+    label="スケジュールファイルのダウンロードはこちらから",
     data=file_data,
     file_name="schedule.xlsx",
     mime="application/vnd.ms-excel"
