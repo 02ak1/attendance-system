@@ -27,6 +27,11 @@ if st.button("確認する"):
             work_df= work_data.parse(work_data.sheet_names[0],header=None)
             schedule_df = schedule_data.parse(schedule_data.sheet_names[0])
             check_schedule(work_df, schedule_df)
+        col = st.columns(2)
+        col[0].write("業務報告ファイル")
+        col[1].write("スケジュールファイル")
+        col[0].write(work_df)
+        col[1].write(schedule_df)
     else:
         st.warning("両方のファイルをアップロードしてください")    
         #st.write(work_df)
