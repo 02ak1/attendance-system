@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-from check import check_time
+from check_test import check_schedule
 
 
 # タイトルの設定
@@ -23,7 +23,7 @@ st.download_button(
 )
 if st.button("確認する"):
     if work_file and schedule_file:
-        check_time(work_file, schedule_file)
+        check_schedule(work_file, schedule_file)
         work_data = pd.ExcelFile(work_file) 
         work_df= work_data.parse(work_data.sheet_names[0],header=None)
         st.write("業務報告ファイル")
