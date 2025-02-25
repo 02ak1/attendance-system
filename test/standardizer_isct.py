@@ -51,6 +51,7 @@ def standardize_work(file, work_standardized_df=None):
     work_df= work_data.parse(work_data.sheet_names[0],header=None)
     name=work_df.iloc[1][11] #名前の取得
     name = name.replace('　', '').replace(' ', '')
+
     data_list = []
     for i in range(6,len(work_df)):
         if work_df.iloc[i][1] == False:
