@@ -9,7 +9,9 @@ def check_time(work_file,schedule_file):
         if work_standardized_df["is_holiday"][i] == True:
                 st.warning(f'{work_standardized_df["Name"][i]}さん、{work_standardized_df["Date"][i]}は祝日のため勤務できません')
                 has_error = True
-                continue        
+                continue
+        else:
+            st.write('祝日ではありません')        
         for j in range(len(schedule_standardized_df)):
             if work_standardized_df['Name'][i] == schedule_standardized_df['Name'][j]:
                 if work_standardized_df['Date'][i] == schedule_standardized_df['Date'][j]:
