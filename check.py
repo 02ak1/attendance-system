@@ -72,9 +72,9 @@ def check_schedule(work_log_list, schedule_log_list):
 
 
 
-def check_work_constraints(work_log_list):
+def check_work_constraints_isct(work_log_list):
     """
-    勤務時間が就業規則に従っているかをチェックする関数。
+    勤務時間が科学大の就業規則に従っているかをチェックする関数。
     就業規則の概要:
     ---- 1日ごとの勤務時間の制約 ----
     1日の上限は7時間45分
