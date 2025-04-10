@@ -51,7 +51,7 @@ def check_schedule(work_log_list, schedule_log_list):
             }
     """
     has_error = False
-    error_list = []
+    error_dict = []
     for work_log in work_log_list:
         for schedule_log in schedule_log_list:
             if work_log['date'] == schedule_log['date']:
@@ -59,7 +59,7 @@ def check_schedule(work_log_list, schedule_log_list):
                     for schedule_time in schedule_log['times']:
                         if work_time['start'] <= schedule_time['end'] and work_time['end'] >= schedule_time['start']:
                             has_error = True
-                            error_list.append({
+                            error_dict.append({
                                 'date': work_log['date'],
                                 'work_start': work_time['start'],
                                 'work_end': work_time['end'],
@@ -67,7 +67,7 @@ def check_schedule(work_log_list, schedule_log_list):
                                 'schedule_end': schedule_time['end']
                             })
                             
-    return has_error, error_list
+    return has_error, error_dict
 
 
 
