@@ -22,17 +22,17 @@ def check_time(work_file,schedule_file):
         st.write("報告された勤務時間は問題ありません")
 
 
-def check_schedule(column_work_log, column_schedule_log):
+def check_schedule(work_log_list, schedule_log_list):
     """
     勤務時間とスケジュールの重複をチェックする関数。
 
     Parameters:
-        column_work_log (pandas.Series): 勤務時間が記録された列。各要素は以下の形式の辞書：
+        column_work_log (list): 勤務時間が記録された列。各要素は以下の形式の辞書：
             {
-                'date': str,  # 日付（例: '2025-04-01'）
-                'times': list of dict  # 各辞書に 'start', 'end' の時刻を含む（例: '09:00'）
+                'date': datetime.date,  # 日付（例: '2025-04-01'）
+                'times': list of dict  # 各辞書に datetime.time型の'start', 'end' の時刻を含む（例: '09:00'）
             }
-        column_schedule_log (pandas.Series): 各自のスケジュール（講義など）が記録された列。
+        column_schedule_log (list): 各自のスケジュール（講義など）が記録された列。
     Returns:
         bool: 重複があった場合はTrue、なかった場合はFalse。
         dict: 重複があった場合の詳細な情報を含む辞書。
@@ -47,8 +47,8 @@ def check_schedule(column_work_log, column_schedule_log):
     """
     has_error = False
     error_list = []
-    for work_log in column_work_log:
-        for schedule_log in column_schedule_log:
+    for work_log in work_log_list:
+        for schedule_log in schedule_log_list:
             if work_log['date'] == schedule_log['date']:
                 for work_time in work_log['times']:
                     for schedule_time in schedule_log['times']:
