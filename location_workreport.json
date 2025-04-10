@@ -1,0 +1,46 @@
+{
+  "sheet_info": {
+    "EXCEL_PATH": "r07kinmu.xlsx",
+    "REPORT": "勤務報告書 Work report",
+    "TIMETABLE": "業務時間表 Work timetable"
+    },
+
+  "timetable_info": {
+    "START": [5, 0],
+    "BUDGET_COL": 2,
+    "START_COL": 3,
+    "END_COL": 4,
+    "CHECK1_COL": 20,
+    "CHECK2_COL": 23
+  },
+
+  "personal_info": {
+    "STUDENT_ID": [1, 103],
+    "NAME": [0, 137],
+    "AFFILIATION": [1, 57],
+    "CONTACT": [1, 175]
+  },
+  
+  "budget_info_1": {
+    "BUDGET_CODE_1": [71, 177],
+    "AFFILIATION_CONFIRM_1": [80, 17],
+    "NAME_CONFIRM_1": [81, 17]
+  },
+  
+  "work_info_1": {
+    "WORK_TYPE_1": [71, 176],
+    "HOURLY_WAGE_1": [71, 179],
+    "EMPLOYEE_ID_1": [73, 178]
+  },
+  
+  "date": {
+    "DATE_START": [0, 10],
+    "DATE_END": [0, 32]
+  },
+  
+  "signature": {
+    "SIGNATURE": [1, 137],
+    "SIGNATURE_CONFIRM_1": [82, 17]
+  }
+
+}
