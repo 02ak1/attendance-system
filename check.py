@@ -150,3 +150,68 @@ def check_work_constraints_isct(work_log_list):
             errors.append(f"{year}年の第{week}週の勤務時間が20時間（1200分）を超えています。合計: {total}分")
 
     return has_error, errors
+
+
+
+def test_check_schedule():
+    from datetime import date, time
+
+    work_log_list = [
+        {
+            'date': date(2025, 4, 1),
+            'times': [
+                {'start': time(8, 0), 'end': time(12, 0)},
+                {'start': time(13, 0), 'end': time(18, 0)}
+            ]
+        }
+    ]
+
+    schedule_log_list = [
+        {
+            'date': date(2025, 4, 1),
+            'times': [
+                {'start': time(9, 0), 'end': time(10, 30)}
+            ]
+        }
+    ]
+
+    has_error, errors = check_schedule(work_log_list, schedule_log_list)
+    print("=== test_check_schedule ===")
+    if has_error:
+        for e in errors:
+            print("⚠️", e)
+    else:
+        print("✅ スケジュールの重複なし")
+
+
+def test_check_work_constraints_isct():
+    from datetime import date, time
+
+    work_log_list = [
+        {
+            'date': date(2025, 4, 1),
+            'times': [
+                {'start': time(8, 0), 'end': time(12, 0)},
+                {'start': time(13, 0), 'end': time(18, 0)}
+            ]
+        },
+        {
+            'date': date(2025, 4, 6),  # 日曜日（祝日も含むチェック）
+            'times': [
+                {'start': time(9, 0), 'end': time(12, 0)}
+            ]
+        }
+    ]
+
+    has_error, errors = check_work_constraints_isct(work_log_list)
+    print("=== test_check_work_constraints_isct ===")
+    if has_error:
+        for e in errors:
+            print("⚠️", e)
+    else:
+        print("✅ 勤務条件違反なし")
+
+# テスト関数呼び出し（スクリプト末尾に入れる）
+if __name__ == "__main__":
+    test_check_schedule()
+    test_check_work_constraints_isct()
