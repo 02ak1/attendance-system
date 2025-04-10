@@ -1,6 +1,11 @@
 import pandas as pd
 import streamlit as st
 from standardizer_isct import standardize_schedule, standardize_work
+
+from datetime import datetime, date, time, timedelta
+import jpholiday
+import collections
+
 def check_time(work_file,schedule_file):
     has_error = False
     work_standardized_df = standardize_work(work_file)
@@ -38,11 +43,11 @@ def check_schedule(work_log_list, schedule_log_list):
         dict: 重複があった場合の詳細な情報を含む辞書。
             各辞書の例：
             {
-                'date': str,
-                'work_start': str,
-                'work_end': str,
-                'schedule_start': str,
-                'schedule_end': str
+                'date': datetime.date,
+                'work_start': datetime.time,
+                'work_end': datetime.time,
+                'schedule_start': datetime.time,
+                'schedule_end': datetime.time
             }
     """
     has_error = False
@@ -63,3 +68,85 @@ def check_schedule(work_log_list, schedule_log_list):
                             })
                             
     return has_error, error_list
+
+
+
+
+def check_work_constraints(work_log_list):
+    """
+    勤務時間が就業規則に従っているかをチェックする関数。
+    就業規則の概要:
+    ---- 1日ごとの勤務時間の制約 ----
+    1日の上限は7時間45分
+    6時間以上の連続勤務になる場合は、途中で45分以上の休憩を挟む
+    ---- 週ごとの勤務時間の制約 ----
+    週に20時間を超過する勤務は禁止
+    ---- 勤務可能時間についての制約 ----
+    勤務可能なのは8:00-20:00の範囲
+    土日祝日の勤務は禁止
+    講義の時間に被るのは禁止(別の関数でチェック)
+    
+    Parameters:
+        work_log_list (list): 勤務時間が記録されたリスト。各要素は以下の形式の辞書：
+            {
+                'date': datetime.date,  # 日付（例: '2025-04-01'）
+                'times': list of dict  # 各辞書に datetime.time型の'start', 'end' の時刻を含む（例: '09:00'）
+            }
+    Returns:
+        bool: エラーがあった場合はTrue、なかった場合はFalse。
+        list: エラーがあった場合の詳細な情報を含むリスト。
+            リストの各要素はエラーメッセージの文字列。
+            例: "2025-04-01 の勤務時間が上限の7時間45分（465分）を超えています。"
+    """
+    has_error = False
+    errors = []
+
+    # 週単位の集計用
+    weekly_minutes = collections.defaultdict(int)  # key: (year, week), value: minutes
+
+    for entry in work_log_list:
+        work_date = entry['date']
+        times = entry['times']
+
+        # --- 勤務可能時間帯 & 土日祝チェック ---
+        if work_date.weekday() >= 5 or jpholiday.is_holiday(work_date):
+            errors.append(f"{work_date} は土日または祝日です。勤務不可。")
+            has_error = True
+
+        total_minutes = 0
+        times_sorted = sorted(times, key=lambda x: x['start'])
+
+        # --- 勤務時間帯チェック & 総勤務時間計算 ---
+        for period in times:
+            s, e = period['start'], period['end']
+            if not (time(8, 0) <= s <= time(20, 0)) or not (time(8, 0) <= e <= time(20, 0)):
+                errors.append(f"{work_date} の勤務が勤務可能時間（8:00-20:00）外です。")
+                has_error = True
+            minutes = (datetime.combine(date.min, e) - datetime.combine(date.min, s)).seconds // 60
+            total_minutes += minutes
+
+        # --- 休憩チェック ---
+        for i in range(len(times_sorted) - 1):
+            end_current = times_sorted[i]['end']
+            start_next = times_sorted[i + 1]['start']
+            rest_minutes = (datetime.combine(date.min, start_next) - datetime.combine(date.min, end_current)).seconds // 60
+            if rest_minutes >= 45:
+                break  # OK
+            else:
+                if total_minutes >= 360:  # 6時間以上働く場合
+                    errors.append(f"{work_date} の勤務が6時間以上連続ですが、45分以上の休憩がありません。")
+                has_error = True
+
+        if total_minutes > 465:
+            errors.append(f"{work_date} の勤務時間が上限の7時間45分（465分）を超えています。")
+            has_error = True
+        # --- 週単位の記録 ---
+        year, week_num, _ = work_date.isocalendar()
+        weekly_minutes[(year, week_num)] += total_minutes
+
+    # --- 週単位のチェック ---
+    for (year, week), total in weekly_minutes.items():
+        if total > 1200:
+            errors.append(f"{year}年の第{week}週の勤務時間が20時間（1200分）を超えています。合計: {total}分")
+
+    return has_error, errors
