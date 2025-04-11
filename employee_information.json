@@ -1,0 +1,222 @@
+[
+    {
+        "personal_info": {
+            "STUDENT_ID": "25D00150",
+            "NAME": "蒲健太郎",
+            "AFFILIATION": "理学院物理学系",
+            "CONTACT": "2387"
+          },
+  
+          "budget_info_1": {
+            "BUDGET_CODE_1": "11JYJY1000000000JY01ZZJY240221nn",
+            "AFFILIATION_CONFIRM_1": "理学院物理学系",
+            "NAME_CONFIRM_1": "大関真之"
+          },
+  
+          "work_info_1": {
+            "WORK_TYPE_1": "RA",
+            "HOURLY_WAGE_1": "3200",
+            "EMPLOYEE_ID_1": "21061771"
+          }
+    },
+    {
+      "personal_info": {
+          "STUDENT_ID": "24M00396",
+          "NAME": "尾崎優太",
+          "AFFILIATION": "理学院物理学系",
+          "CONTACT": "2387"
+        },
+
+        "budget_info_1": {
+          "BUDGET_CODE_1": "11JYJY1000000000JY01ZZJY240221nn",
+          "AFFILIATION_CONFIRM_1": "理学院物理学系",
+          "NAME_CONFIRM_1": "大関真之"
+        },
+
+        "work_info_1": {
+          "WORK_TYPE_1": "RA",
+          "HOURLY_WAGE_1": "2800",
+          "EMPLOYEE_ID_1": "21061780"
+        }
+    },
+    {
+        "personal_info": {
+            "STUDENT_ID": "24M00781",
+            "NAME": "松本侑真",
+            "AFFILIATION": "理学院物理学系",
+            "CONTACT": "2387"
+          },
+  
+          "budget_info_1": {
+            "BUDGET_CODE_1": "11JYJY1000000000JY01ZZJY240221nn",
+            "AFFILIATION_CONFIRM_1": "理学院物理学系",
+            "NAME_CONFIRM_1": "大関真之"
+          },
+  
+          "work_info_1": {
+            "WORK_TYPE_1": "RA",
+            "HOURLY_WAGE_1": "2800",
+            "EMPLOYEE_ID_1": "21061799"
+          }
+      },
+      {
+        "personal_info": {
+            "STUDENT_ID": "25M00413",
+            "NAME": "鈴木泰雅",
+            "AFFILIATION": "理学院物理学系",
+            "CONTACT": "2387"
+          },
+  
+          "budget_info_1": {
+            "BUDGET_CODE_1": "11JYJY1000000000JY01ZZJY240221nn",
+            "AFFILIATION_CONFIRM_1": "理学院物理学系",
+            "NAME_CONFIRM_1": "大関真之"
+          },
+  
+          "work_info_1": {
+            "WORK_TYPE_1": "RA",
+            "HOURLY_WAGE_1": "2400",
+            "EMPLOYEE_ID_1": "21061804"
+          }
+    },
+    {
+        "personal_info": {
+            "STUDENT_ID": "21B00763",
+            "NAME": "肖一飛",
+            "AFFILIATION": "理学院物理学系",
+            "CONTACT": ""
+          },
+  
+          "budget_info_1": {
+            "BUDGET_CODE_1": "11JYJY1000000000JY01ZZJY240221nn",
+            "AFFILIATION_CONFIRM_1": "理学院物理学系",
+            "NAME_CONFIRM_1": "大関真之"
+          },
+  
+          "work_info_1": {
+            "WORK_TYPE_1": "RA",
+            "HOURLY_WAGE_1": "1600",
+            "EMPLOYEE_ID_1": "21064703"
+          }
+    },
+    {
+        "personal_info": {
+            "STUDENT_ID": "22B01620",
+            "NAME": "ルウヨウマオ",
+            "AFFILIATION": "理学院物理学系",
+            "CONTACT": ""
+          },
+  
+          "budget_info_1": {
+            "BUDGET_CODE_1": "11JYJY1000000000JY01ZZJY240221nn",
+            "AFFILIATION_CONFIRM_1": "理学院物理学系",
+            "NAME_CONFIRM_1": "大関真之"
+          },
+  
+          "work_info_1": {
+            "WORK_TYPE_1": "RA",
+            "HOURLY_WAGE_1": "1600",
+            "EMPLOYEE_ID_1": "21064712"
+          }
+    },
+    {
+        "personal_info": {
+            "STUDENT_ID": "24B11434",
+            "NAME": "齊藤孝介",
+            "AFFILIATION": "理学院物理学系",
+            "CONTACT": ""
+          },
+  
+          "budget_info_1": {
+            "BUDGET_CODE_1": "11JYJY1000000000JY01ZZJY240221nn",
+            "AFFILIATION_CONFIRM_1": "理学院物理学系",
+            "NAME_CONFIRM_1": "大関真之"
+          },
+  
+          "work_info_1": {
+            "WORK_TYPE_1": "RA",
+            "HOURLY_WAGE_1": "1600",
+            "EMPLOYEE_ID_1": "21064721"
+          }
+    },
+    {
+        "personal_info": {
+            "STUDENT_ID": "22B30661",
+            "NAME": "長谷川駿",
+            "AFFILIATION": "情報理工学院数理計算科学系",
+            "CONTACT": ""
+          },
+  
+          "budget_info_1": {
+            "BUDGET_CODE_1": "11JYJY1000000000JY01ZZJY240221nn",
+            "AFFILIATION_CONFIRM_1": "理学院物理学系",
+            "NAME_CONFIRM_1": "大関真之"
+          },
+  
+          "work_info_1": {
+            "WORK_TYPE_1": "RA",
+            "HOURLY_WAGE_1": "1600",
+            "EMPLOYEE_ID_1": "21064731"
+          }
+    },
+    {
+        "personal_info": {
+            "STUDENT_ID": "23B20660",
+            "NAME": "黒崎真太郎",
+            "AFFILIATION": "物質理工学院材料系",
+            "CONTACT": ""
+          },
+  
+          "budget_info_1": {
+            "BUDGET_CODE_1": "11JYJY1000000000JY01ZZJY240221nn",
+            "AFFILIATION_CONFIRM_1": "理学院物理学系",
+            "NAME_CONFIRM_1": "大関真之"
+          },
+  
+          "work_info_1": {
+            "WORK_TYPE_1": "RA",
+            "HOURLY_WAGE_1": "1600",
+            "EMPLOYEE_ID_1": "21064740"
+          }
+    },
+    {
+        "personal_info": {
+            "STUDENT_ID": "21B00183",
+            "NAME": "石田隆人",
+            "AFFILIATION": "理学院化学系",
+            "CONTACT": ""
+          },
+  
+          "budget_info_1": {
+            "BUDGET_CODE_1": "11JYJY1000000000JY01ZZJY240221nn",
+            "AFFILIATION_CONFIRM_1": "理学院物理学系",
+            "NAME_CONFIRM_1": "大関真之"
+          },
+  
+          "work_info_1": {
+            "WORK_TYPE_1": "RA",
+            "HOURLY_WAGE_1": "1600",
+            "EMPLOYEE_ID_1": "21064768"
+          }
+    },
+    {
+        "personal_info": {
+            "STUDENT_ID": "22B51373",
+            "NAME": "黎安琪",
+            "AFFILIATION": "環境社会理工学院融合理工学系",
+            "CONTACT": ""
+          },
+  
+          "budget_info_1": {
+            "BUDGET_CODE_1": "11JYJY1000000000JY01ZZJY240221nn",
+            "AFFILIATION_CONFIRM_1": "理学院物理学系",
+            "NAME_CONFIRM_1": "大関真之"
+          },
+  
+          "work_info_1": {
+            "WORK_TYPE_1": "RA",
+            "HOURLY_WAGE_1": "1600",
+            "EMPLOYEE_ID_1": "21064777"
+          }
+    }
+  ]
