@@ -82,7 +82,7 @@
     "SIGNATURE_CONFIRM_4": [82, 119]
   },
 
-  "work_content" {
+  "work_content": {
     "START": [8, 174],
     "END": [68, 174]
   }
