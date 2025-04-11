@@ -5,26 +5,27 @@ from standardizer_isct import standardize_schedule, standardize_work
 from datetime import datetime, date, time, timedelta
 import jpholiday
 import collections
+import json
 
-def check_time(work_file,schedule_file):
-    has_error = False
-    work_standardized_df = standardize_work(work_file)
-    schedule_standardized_df = standardize_schedule(schedule_file)
-    for i in range(len(work_standardized_df)):
-        if work_standardized_df["is_holiday"][i] == True:
-                st.warning(f'{work_standardized_df["Name"][i]}さん、{work_standardized_df["Date"][i]}は祝日のため勤務できません')
-                has_error = True
-                continue       
-        for j in range(len(schedule_standardized_df)):
-            if work_standardized_df['Name'][i] == schedule_standardized_df['Name'][j]:
-                if work_standardized_df['Date'][i] == schedule_standardized_df['Date'][j]:
-                    if work_standardized_df['Start_Time'][i] <= schedule_standardized_df['End_Time'][j] and work_standardized_df['End_Time'][i] >= schedule_standardized_df['Start_Time'][j]:
-                        has_error = True
-                        manth_day = pd.to_datetime(work_standardized_df["Date"][i]).strftime("%m-%d")
-                        st.warning(f'{manth_day}({work_standardized_df["Name"][i]})の{schedule_standardized_df["Start_Time"][j]}から{schedule_standardized_df["End_Time"][j]}は{schedule_standardized_df["Name"][j]}さんが{schedule_standardized_df["Description"][j]}に参加中であるため勤務できません。')
+# def check_time(work_file,schedule_file):
+#     has_error = False
+#     work_standardized_df = standardize_work(work_file)
+#     schedule_standardized_df = standardize_schedule(schedule_file)
+#     for i in range(len(work_standardized_df)):
+#         if work_standardized_df["is_holiday"][i] == True:
+#                 st.warning(f'{work_standardized_df["Name"][i]}さん、{work_standardized_df["Date"][i]}は祝日のため勤務できません')
+#                 has_error = True
+#                 continue       
+#         for j in range(len(schedule_standardized_df)):
+#             if work_standardized_df['Name'][i] == schedule_standardized_df['Name'][j]:
+#                 if work_standardized_df['Date'][i] == schedule_standardized_df['Date'][j]:
+#                     if work_standardized_df['Start_Time'][i] <= schedule_standardized_df['End_Time'][j] and work_standardized_df['End_Time'][i] >= schedule_standardized_df['Start_Time'][j]:
+#                         has_error = True
+#                         manth_day = pd.to_datetime(work_standardized_df["Date"][i]).strftime("%m-%d")
+#                         st.warning(f'{manth_day}({work_standardized_df["Name"][i]})の{schedule_standardized_df["Start_Time"][j]}から{schedule_standardized_df["End_Time"][j]}は{schedule_standardized_df["Name"][j]}さんが{schedule_standardized_df["Description"][j]}に参加中であるため勤務できません。')
                         
-    if has_error == False:
-        st.write("報告された勤務時間は問題ありません")
+#     if has_error == False:
+#         st.write("報告された勤務時間は問題ありません")
 
 
 def check_schedule(work_log_list, schedule_log_list):
@@ -35,9 +36,13 @@ def check_schedule(work_log_list, schedule_log_list):
         column_work_log (list): 勤務時間が記録された列。各要素は以下の形式の辞書：
             {
                 'date': datetime.date,  # 日付（例: '2025-04-01'）
-                'times': list of dict  # 各辞書に datetime.time型の'start', 'end' の時刻を含む（例: '09:00'）
+                'times': list of dict  # 各辞書に datetime.time型の'start', 'end' を含む（例: '09:00'）
             }
         column_schedule_log (list): 各自のスケジュール（講義など）が記録された列。
+            {
+                'date': datetime.date,  # 日付（例: '2025-04-01'）
+                'times': list of dict  # 各辞書に datetime.time型の'start', 'end' とstring型の'event'を含む（例: '09:00'）
+            }
     Returns:
         bool: 重複があった場合はTrue、なかった場合はFalse。
         dict: 重複があった場合の詳細な情報を含む辞書。
@@ -51,7 +56,7 @@ def check_schedule(work_log_list, schedule_log_list):
             }
     """
     has_error = False
-    error_dict = []
+    errors = []
     for work_log in work_log_list:
         for schedule_log in schedule_log_list:
             if work_log['date'] == schedule_log['date']:
@@ -59,15 +64,8 @@ def check_schedule(work_log_list, schedule_log_list):
                     for schedule_time in schedule_log['times']:
                         if work_time['start'] <= schedule_time['end'] and work_time['end'] >= schedule_time['start']:
                             has_error = True
-                            error_dict.append({
-                                'date': work_log['date'],
-                                'work_start': work_time['start'],
-                                'work_end': work_time['end'],
-                                'schedule_start': schedule_time['start'],
-                                'schedule_end': schedule_time['end']
-                            })
-                            
-    return has_error, error_dict
+                            errors.append(f"勤務時間とスケジュールが重複しています: {work_log['date']}の{work_time['start']}-{work_time['end']}は{schedule_log['event']}の{schedule_time['start']}-{schedule_time['end']}と重複しています。")
+    return has_error , errors
 
 
 
@@ -151,6 +149,46 @@ def check_work_constraints_isct(work_log_list):
 
     return has_error, errors
 
+def check_employee_information(personal_info_df, budget_info_df, work_info_df):
+    # JSONファイルを読み込む
+    with open("employee_information.json", "r", encoding="utf-8") as f:
+        employee_information = json.load(f)
+    
+    has_error = False
+    errors = []
+    
+    student_id = str(personal_info_df["STUDENT_ID"].values[0])
+    # 学生IDに対応する情報をemployee_information.jsonから取得
+    employee_info = next((entry for entry in employee_information if entry["personal_info"]["STUDENT_ID"] == student_id), None)
+    if employee_info is None:
+        errors.append(f"STUDENT_ID {student_id} が employee_information.json に見つかりません。")
+        has_error = True
+        return has_error, errors
+    
+    # 比較対象の辞書データ
+    fields_to_check = [
+        # personal_info
+        ("personal_info", "NAME", personal_info_df["NAME"].values[0]),
+        ("personal_info", "AFFILIATION", personal_info_df["AFFILIATION"].values[0]),
+        ("personal_info", "CONTACT", personal_info_df["CONTACT"].values[0]),
+        # budget_info
+        ("budget_info_1", "BUDGET_CODE_1", budget_info_df["BUDGET_CODE_1"].values[0]),
+        ("budget_info_1", "AFFILIATION_CONFIRM_1", budget_info_df["AFFILIATION_CONFIRM_1"].values[0]),
+        ("budget_info_1", "NAME_CONFIRM_1", budget_info_df["NAME_CONFIRM_1"].values[0]),
+        # work_info
+        ("work_info_1", "WORK_TYPE_1", work_info_df["WORK_TYPE_1"].values[0]),
+        ("work_info_1", "HOURLY_WAGE_1", work_info_df["HOURLY_WAGE_1"].values[0]),
+        ("work_info_1", "EMPLOYEE_ID_1", work_info_df["EMPLOYEE_ID_1"].values[0]),
+    ]
+    
+    for section, key, value in fields_to_check:
+        expected_value = str(employee_info[section].get(key, "")).strip()
+        df_value = str(value).strip()
+        if expected_value != df_value:
+            errors.append(f"{section} の {key} が一致しません。期待値: {expected_value}, 入力されている値: {df_value}")
+            has_error = True
+    
+    return has_error, errors
 
 
 def test_check_schedule():
