@@ -64,7 +64,7 @@ def check_schedule(work_log_list, schedule_log_list):
                     for schedule_time in schedule_log['times']:
                         if work_time['start'] <= schedule_time['end'] and work_time['end'] >= schedule_time['start']:
                             has_error = True
-                            errors.append(f"勤務時間とスケジュールが重複しています: {work_log['date']}の{work_time['start']}-{work_time['end']}は{schedule_log['event']}の{schedule_time['start']}-{schedule_time['end']}と重複しています。")
+                            errors.append(f"勤務時間とスケジュールが重複しています: {work_log['date']}の{work_time['start']}-{work_time['end']}は{schedule_time['event']}の{schedule_time['start']}-{schedule_time['end']}と重複しています。")
     return has_error , errors
 
 
@@ -208,7 +208,7 @@ def test_check_schedule():
         {
             'date': date(2025, 4, 1),
             'times': [
-                {'start': time(9, 0), 'end': time(10, 30)}
+                {'start': time(9, 0), 'end': time(10, 30), 'event': '講義'}
             ]
         }
     ]
@@ -248,8 +248,41 @@ def test_check_work_constraints_isct():
             print("⚠️", e)
     else:
         print("✅ 勤務条件違反なし")
+        
+def test_check_employee_information():
+    # --- DataFrameを仮作成（JSONに合わせて作成） ---
+    personal_info_df = pd.DataFrame([{
+        "STUDENT_ID": "25D00150",
+        "NAME": "蒲健太郎",
+        "AFFILIATION": "理学院物理学系",
+        "CONTACT": "2387"
+    }])
+
+    budget_info_df = pd.DataFrame([{
+        "BUDGET_CODE_1": "11JYJY1000000000JY01ZZJY240221nn",
+        "AFFILIATION_CONFIRM_1": "理学院物理学系",
+        "NAME_CONFIRM_1": "大関真之"
+    }])
+
+    work_info_df = pd.DataFrame([{
+        "WORK_TYPE_1": "RA",
+        "HOURLY_WAGE_1": 3000,
+        "EMPLOYEE_ID_1": "21061771"
+    }])
+
+    # --- テスト実行 ---
+    has_error, errors = check_employee_information(personal_info_df, budget_info_df, work_info_df)
+
+    # --- 結果表示 ---
+    if has_error:
+        print("❌ エラーが見つかりました：")
+        for err in errors:
+            print(" -", err)
+    else:
+        print("✅ 全て一致しています。テスト合格！")
 
 # テスト関数呼び出し（スクリプト末尾に入れる）
 if __name__ == "__main__":
     test_check_schedule()
     test_check_work_constraints_isct()
+    test_check_employee_information()
