@@ -26,13 +26,49 @@
     "AFFILIATION_CONFIRM_1": [80, 17],
     "NAME_CONFIRM_1": [81, 17]
   },
+
+  "budget_info_2": {
+    "BUDGET_CODE_2": [75, 177],
+    "AFFILIATION_CONFIRM_2": [80, 51],
+    "NAME_CONFIRM_2": [81, 51]
+  },
+  
+  "budget_info_3": {
+    "BUDGET_CODE_3": [79, 177],
+    "AFFILIATION_CONFIRM_3": [80, 85],
+    "NAME_CONFIRM_3": [81, 85]
+  },
+
+  "budget_info_4": {
+    "BUDGET_CODE_4": [81, 177],
+    "AFFILIATION_CONFIRM_4": [80, 119],
+    "NAME_CONFIRM_4": [81, 119]
+  },
   
   "work_info_1": {
     "WORK_TYPE_1": [71, 176],
     "HOURLY_WAGE_1": [71, 179],
     "EMPLOYEE_ID_1": [73, 178]
   },
+
+  "work_info_2": {
+    "WORK_TYPE_2": [75, 176],
+    "HOURLY_WAGE_2": [75, 179],
+    "EMPLOYEE_ID_2": [77, 178]
+  },
+
+  "work_info_3": {
+    "WORK_TYPE_3": [79, 176],
+    "HOURLY_WAGE_3": [79, 179],
+    "EMPLOYEE_ID_3": [80, 178]
+  },
   
+  "work_info_4": {
+    "WORK_TYPE_4": [81, 176],
+    "HOURLY_WAGE_4": [81, 179],
+    "EMPLOYEE_ID_4": [82, 178]
+  },
+
   "date": {
     "DATE_START": [0, 10],
     "DATE_END": [0, 32]
@@ -40,7 +76,14 @@
   
   "signature": {
     "SIGNATURE": [1, 137],
-    "SIGNATURE_CONFIRM_1": [82, 17]
-  }
+    "SIGNATURE_CONFIRM_1": [82, 17],
+    "SIGNATURE_CONFIRM_2": [82, 51],
+    "SIGNATURE_CONFIRM_3": [82, 85],
+    "SIGNATURE_CONFIRM_4": [82, 119]
+  },
 
+  "work_content" {
+    "START": [8, 174],
+    "END": [68, 174]
+  }
 }
