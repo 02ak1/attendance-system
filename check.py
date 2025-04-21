@@ -153,6 +153,13 @@ def check_work_constraints_isct(work_log_list):
 def check_employee_information(personal_info_df, budget_info_df, work_info_df):
     """
     学生の個人情報、予算情報、勤務情報が employee_information.json と一致しているかをチェックする関数。
+    Parameters:
+        personal_info_df (pd.DataFrame): 個人情報のDataFrame
+        budget_info_df (pd.DataFrame): 予算情報のDataFrame
+        work_info_df (pd.DataFrame): 勤務情報のDataFrame
+    Returns:
+        bool: 一致していない場合はTrue、すべて一致している場合はFalse
+        list: エラーがあった場合の詳細な情報を含むリスト
     """
     # JSONファイルを読み込む
     with open("employee_information.json", "r", encoding="utf-8") as f:
