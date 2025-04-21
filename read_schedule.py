@@ -17,6 +17,23 @@ df_schedule_non_weekly = pd.read_excel(excel_path, sheet_name="不定期の予�
 
 
 def make_timetable_schedule(name_input, df_schedule_weekly, df_schedule_non_weekly):
+    """
+    指定された名前のスケジュールを取得する関数
+    parameters:
+        name_input(str): 取得したい名前
+        df_schedule_weekly(DataFrame): 毎週の予定のDataFrame
+        df_schedule_non_weekly(DataFrame): 不定期の予定のDataFrame
+    returns:
+        timetables(list): 指定された名前のスケジュールのリスト 以下は例
+            [
+                {
+                'date': Timestamp('2025-02-03 00:00:00'), 'times': [{'start': datetime.time(10, 0), 'end': datetime.time(10, 30), 'event': 'テスト'}]
+                },
+                {
+                    'date': Timestamp('2024-04-01 00:00:00'), 'times': [{'start': datetime.time(9, 0), 'end': datetime.time(11, 0), 'event': '力学'}]
+                    }
+            ]
+    """
     timetables = []
     
     #　不定期の予定を取得
