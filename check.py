@@ -35,13 +35,13 @@ def check_schedule(work_log_list, schedule_log_list):
     Parameters:
         column_work_log (list): 勤務時間が記録された列。各要素は以下の形式の辞書：
             {
-                'date': datetime.date,  # 日付（例: '2025-04-01'）
-                'times': list of dict  # 各辞書に datetime.time型の'start', 'end' を含む（例: '09:00'）
+                'date': datetime.datetime,  # 日付（例: '2025-04-01'）
+                'times': list of dict  # 各辞書に datetime.time型の'start', 'end' を含む
             }
         column_schedule_log (list): 各自のスケジュール（講義など）が記録された列。
             {
-                'date': datetime.date,  # 日付（例: '2025-04-01'）
-                'times': list of dict  # 各辞書に datetime.time型の'start', 'end' とstring型の'event'を含む（例: '09:00'）
+                'date': datetime.datetime,  # 日付（例: '2025-04-01'）
+                'times': list of dict  # 各辞書に datetime.time型の'start', 'end' とstring型の'event'を含む
             }
     Returns:
         bool: 重複があった場合はTrue、なかった場合はFalse。
