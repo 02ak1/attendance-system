@@ -146,6 +146,7 @@ def check_work_constraints_isct(work_log_list):
     for (year, week), total in weekly_minutes.items():
         if total > 1200:
             errors.append(f"{year}年の第{week}週の勤務時間が20時間（1200分）を超えています。合計: {total}分")
+            has_error = True
 
     return has_error, errors
 
