@@ -151,6 +151,9 @@ def check_work_constraints_isct(work_log_list):
     return has_error, errors
 
 def check_employee_information(personal_info_df, budget_info_df, work_info_df):
+    """
+    学生の個人情報、予算情報、勤務情報が employee_information.json と一致しているかをチェックする関数。
+    """
     # JSONファイルを読み込む
     with open("employee_information.json", "r", encoding="utf-8") as f:
         employee_information = json.load(f)
@@ -191,7 +194,7 @@ def check_employee_information(personal_info_df, budget_info_df, work_info_df):
     
     return has_error, errors
 
-
+# テスト関数
 def test_check_schedule():
     from datetime import date, time
 
