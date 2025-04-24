@@ -1,13 +1,23 @@
 import streamlit as st
 import pandas as pd
 from main import checker
-
+import json
 
 # タイトルの設定
 st.title("勤怠管理アプリ")
 
 # ファイルアップロード機能
 work_file = st.file_uploader("科学大の業務報告ファイルをアップロードしてください", type=["xlsx"])
+# JSONファイルの読み込み
+with open("location_workreport.json", encoding="utf-8") as f:
+    config = json.load(f)
+
+REPORT     = config["sheet_info"]["REPORT"]
+TIMETABLE  = config["sheet_info"]["TIMETABLE"]
+# Excelからデータを読み込み
+df_report    = pd.read_excel(work_file, sheet_name=REPORT,    index_col=0)
+df_timetable = pd.read_excel(work_file, sheet_name=TIMETABLE, index_col=0)
+st.write(df_timetable)
 
 if st.button("確認する"):
     if work_file:

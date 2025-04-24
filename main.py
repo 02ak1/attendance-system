@@ -8,7 +8,7 @@ from datetime import datetime
 import os
 import streamlit as st
 
-def checker(excel_path):
+def checker(df_report, df_timetable):
     # JSONファイルの読み込み
     with open("location_workreport.json", encoding="utf-8") as f:
         config = json.load(f)
