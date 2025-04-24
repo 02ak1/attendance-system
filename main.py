@@ -8,20 +8,8 @@ from datetime import datetime
 import os
 import streamlit as st
 
-def checker(df_report, df_timetable):
-    # JSONファイルの読み込み
-    with open("location_workreport.json", encoding="utf-8") as f:
-        config = json.load(f)
-
-    # 勤務Excelファイルとシートの情報を取得
-    excel_path = excel_path
-    REPORT     = config["sheet_info"]["REPORT"]
-    TIMETABLE  = config["sheet_info"]["TIMETABLE"]
-
-    # Excelからデータを読み込み
-    df_report    = pd.read_excel(excel_path, sheet_name=REPORT,    index_col=0)
-    df_timetable = pd.read_excel(excel_path, sheet_name=TIMETABLE, index_col=0)
-    st.write(df_timetable)
+def checker(df_report, df_timetable,config):
+    
     
     # データフレームの作成
     report = make_df_workreport(df_report, config)
