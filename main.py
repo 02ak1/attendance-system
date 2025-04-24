@@ -31,9 +31,6 @@ def checker(excel_path):
     # このファイル（main.py）からの相対パスでExcelファイルを指定
     BASE_DIR = os.path.dirname(__file__)
     excel_schedule = os.path.join(BASE_DIR, "schedule.xlsx")
-    # ファイルを読み込み
-    df_schedule_weekly = pd.read_excel(excel_schedule, sheet_name="毎週の予定", header=0)
-    excel_schedule = "/Users/ozakiyuuta/Documents/東工大/T-qard/apps/schedule.xlsx"
     df_schedule_weekly    = pd.read_excel(excel_schedule, sheet_name="毎週の予定", header=0)
     df_schedule_weekly=df_schedule_weekly[["名前", "曜日", "開始時間", "終了時間", "予定", "開始日", "終了日"]]
     df_schedule_weekly = df_schedule_weekly.dropna(how="all").reset_index(drop=True)
