@@ -30,7 +30,7 @@ def checker(excel_path):
     
     # スケジュールの読み込み
     # このファイル（main.py）からの相対パスでExcelファイルを指定
-    BASE_DIR = os.path.dirname(__file__)
+    BASE_DIR = "" #os.path.dirname(__file__)
     excel_schedule = os.path.join(BASE_DIR, "schedule.xlsx")
     df_schedule_weekly    = pd.read_excel(excel_schedule, sheet_name="毎週の予定", header=0)
     st.write(df_schedule_weekly)
