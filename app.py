@@ -21,7 +21,7 @@ st.write(df_timetable)
 
 if st.button("確認する"):
     if work_file:
-        errors=checker(work_file)
+        errors=checker(df_report, df_timetable)
         
         hase_error = len(errors) > 0
         if hase_error:
