@@ -52,7 +52,7 @@ def checker(excel_path):
     
 if __name__ == "__main__":
     excel_path = "/Users/ozakiyuuta/Documents/東工大/T-qard/apps/4月業務時間表_尾崎優太.xlsx"
-    errors = main(excel_path)
+    errors = checker(excel_path)
     
     if errors:
         print("エラーが見つかりました:")
