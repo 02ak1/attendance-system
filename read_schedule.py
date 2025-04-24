@@ -4,6 +4,7 @@ from datetime import datetime
 
 
 
+"""
 # Excelファイルとシートの情報を取得
 excel_path = "/Users/ozakiyuuta/Documents/東工大/T-qard/apps/schedule.xlsx"
 
@@ -13,7 +14,7 @@ df_schedule_weekly=df_schedule_weekly[["名前", "曜日", "開始時間", "終�
 df_schedule_weekly = df_schedule_weekly.dropna(how="all").reset_index(drop=True)
 
 df_schedule_non_weekly = pd.read_excel(excel_path, sheet_name="不定期の予定", header=0)
-
+"""
 
 
 def make_timetable_schedule(name_input, df_schedule_weekly, df_schedule_non_weekly):
