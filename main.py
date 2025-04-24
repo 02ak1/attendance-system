@@ -21,6 +21,7 @@ def checker(excel_path):
     # Excelからデータを読み込み
     df_report    = pd.read_excel(excel_path, sheet_name=REPORT,    index_col=0)
     df_timetable = pd.read_excel(excel_path, sheet_name=TIMETABLE, index_col=0)
+    st.write(df_report)
     
     # データフレームの作成
     report = make_df_workreport(df_report, config)
