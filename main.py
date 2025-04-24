@@ -6,7 +6,7 @@ import json
 import pandas as pd
 from datetime import datetime
 
-def main(excel_path):
+def checker(excel_path):
     # JSONファイルの読み込み
     with open("location_workreport.json", encoding="utf-8") as f:
         config = json.load(f)
