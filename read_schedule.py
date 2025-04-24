@@ -7,7 +7,7 @@ from datetime import datetime
 # Excelファイルとシートの情報を取得
 excel_path = "/Users/ozakiyuuta/Documents/東工大/T-qard/apps/schedule.xlsx"
 
-# Excelからデータを読み込み（すべて文字列として読み込むのが安全）
+# Excelからデータを読み込み
 df_schedule_weekly    = pd.read_excel(excel_path, sheet_name="毎週の予定", header=0)
 df_schedule_weekly=df_schedule_weekly[["名前", "曜日", "開始時間", "終了時間", "予定", "開始日", "終了日"]]
 df_schedule_weekly = df_schedule_weekly.dropna(how="all").reset_index(drop=True)
