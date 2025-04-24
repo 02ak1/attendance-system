@@ -5,6 +5,7 @@ from check import check_schedule, check_work_constraints_isct, check_employee_in
 import json
 import pandas as pd
 from datetime import datetime
+import os
 
 def checker(excel_path):
     # JSONファイルの読み込み
@@ -27,6 +28,11 @@ def checker(excel_path):
     timetables_work = make_timetable(df_timetable, date_info_df)
     
     # スケジュールの読み込み
+    # このファイル（main.py）からの相対パスでExcelファイルを指定
+    BASE_DIR = os.path.dirname(__file__)
+    excel_schedule = os.path.join(BASE_DIR, "schedule.xlsx")
+    # ファイルを読み込み
+    df_schedule_weekly = pd.read_excel(excel_schedule, sheet_name="毎週の予定", header=0)
     excel_schedule = "/Users/ozakiyuuta/Documents/東工大/T-qard/apps/schedule.xlsx"
     df_schedule_weekly    = pd.read_excel(excel_schedule, sheet_name="毎週の予定", header=0)
     df_schedule_weekly=df_schedule_weekly[["名前", "曜日", "開始時間", "終了時間", "予定", "開始日", "終了日"]]
