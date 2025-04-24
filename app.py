@@ -14,14 +14,19 @@ with open("location_workreport.json", encoding="utf-8") as f:
 
 REPORT     = config["sheet_info"]["REPORT"]
 TIMETABLE  = config["sheet_info"]["TIMETABLE"]
-# Excelからデータを読み込み
-df_report    = pd.read_excel(work_file, sheet_name=REPORT,    index_col=0)
-df_timetable = pd.read_excel(work_file, sheet_name=TIMETABLE, index_col=0)
-st.write(df_timetable)
+
+if work_file:
+    # Excelファイルの読み込み
+    df_report    = pd.read_excel(work_file, sheet_name=REPORT,    index_col=0)
+    df_timetable = pd.read_excel(work_file, sheet_name=TIMETABLE, index_col=0)
+    st.write(df_timetable)
+else:
+    st.warning("業務報告ファイルをアップロードしてください")
+
 
 if st.button("確認する"):
     if work_file:
-        errors=checker(df_report, df_timetable, config)
+        errors=checker(df_report, df_timetable)
         
         hase_error = len(errors) > 0
         if hase_error:

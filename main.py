@@ -8,9 +8,11 @@ from datetime import datetime
 import os
 import streamlit as st
 
-def checker(df_report, df_timetable,config):
+def checker(df_report, df_timetable):
     
-    
+    # JSONファイルの読み込み
+    with open("location_workreport.json", encoding="utf-8") as f:
+        config = json.load(f)
     # データフレームの作成
     report = make_df_workreport(df_report, config)
     personal_info_df, budget_info_df, work_info_df, date_info_df, signature_df = report.export_df()
