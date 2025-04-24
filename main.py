@@ -6,6 +6,7 @@ import json
 import pandas as pd
 from datetime import datetime
 import os
+import streamlit as st
 
 def checker(excel_path):
     # JSONファイルの読み込み
@@ -32,6 +33,7 @@ def checker(excel_path):
     BASE_DIR = os.path.dirname(__file__)
     excel_schedule = os.path.join(BASE_DIR, "schedule.xlsx")
     df_schedule_weekly    = pd.read_excel(excel_schedule, sheet_name="毎週の予定", header=0)
+    st.write(df_schedule_weekly)
     df_schedule_weekly=df_schedule_weekly[["名前", "曜日", "開始時間", "終了時間", "予定", "開始日", "終了日"]]
     df_schedule_weekly = df_schedule_weekly.dropna(how="all").reset_index(drop=True)
     df_schedule_non_weekly = pd.read_excel(excel_schedule, sheet_name="不定期の予定", header=0)
