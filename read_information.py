@@ -16,12 +16,12 @@ df_report    = pd.read_excel(excel_path, sheet_name=REPORT,    index_col=0)
 df_timetable = pd.read_excel(excel_path, sheet_name=TIMETABLE, index_col=0)
 
 # 機能：指定位置からデータを取り出して1行だけのDataFrameにする関数
-class make_df_workreport(df_report):
-    def __init__(self):
-        pass
+class make_df_workreport:
+    def __init__(self, df_report):
+        self.df_report = df_report
 
     def make_df(self, block_config):
-        df_report = df_report
+        df_report = self.df_report
         data = {}
         for key, (row, col) in block_config.items():
             value = df_report.iat[row, col]  # 指定位置の値を取得
