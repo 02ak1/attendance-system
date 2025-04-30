@@ -1,0 +1,11 @@
+[tools]
+uv = "latest"
+
+[tasks.sync]
+run = "uv sync"
+
+[tasks.run]
+run = "uv run streamlit run app.py"
+
+[tasks.deploy]
+run = ["mise run sync", "mise run run"]
