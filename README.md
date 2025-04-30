@@ -23,7 +23,8 @@ channel_id = "CXXXXXXXX"
 以下のコマンドでツールのインストールとアプリの実行を行います：
 
 ```bash
-mise install        # mise.toml に記載されたツールをインストール
+mise install        # mise.toml に記載されたツール (uv) をインストール
+mise run init       # クレデンシャルを格納するフォルダが存在しない場合は作成し、uvを用いてパッケージの同期を行う
 mise run deploy     # uv 経由で Streamlit アプリを実行
 ```
 

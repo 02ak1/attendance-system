@@ -1,8 +1,15 @@
 [tools]
 uv = "latest"
 
+[tasks.init]
+run = [
+    "mkdir -p .streamlit",
+    "touch .streamlit/secrets.toml",
+    "uv sync"
+]
+
 [tasks.sync]
-run = "uv sync"
+run = ["uv sync"]
 
 [tasks.run]
 run = "uv run streamlit run app.py"
