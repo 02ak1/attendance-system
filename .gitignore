@@ -1,0 +1,9 @@
+work.xlsx
+venv/
+.python-version
+__pycache__/
+.DS_Store
+~$*
+
+# secrets
+.streamlit/secrets.toml
